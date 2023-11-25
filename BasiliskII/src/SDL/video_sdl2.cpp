@@ -729,14 +729,18 @@ static SDL_Surface *init_sdl_video(int width, int height, int depth, Uint32 flag
 	const int window_flags_to_monitor = SDL_WINDOW_FULLSCREEN;
 	
 	if (flags & SDL_WINDOW_FULLSCREEN) {
-		SDL_DisplayMode desktop_mode;
-		if (SDL_GetDesktopDisplayMode(0, &desktop_mode) != 0) {
-			shutdown_sdl_video();
-			return NULL;
+		if (PrefsFindBool("fs_noscale")) {
+			window_flags |= SDL_WINDOW_FULLSCREEN;
+		} else {
+			SDL_DisplayMode desktop_mode;
+			if (SDL_GetDesktopDisplayMode(0, &desktop_mode) != 0) {
+				shutdown_sdl_video();
+				return NULL;
+			}
+			window_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+			window_width = desktop_mode.w;
+			window_height = desktop_mode.h;
 		}
-		window_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
-		window_width = desktop_mode.w;
-		window_height = desktop_mode.h;
 	}
 	
 	if (sdl_window) {
@@ -1706,7 +1710,7 @@ static void do_toggle_fullscreen(void)
 #endif
 		} else {
 			display_type = DISPLAY_SCREEN;
-			SDL_SetWindowFullscreen(sdl_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			SDL_SetWindowFullscreen(sdl_window, SDL_WINDOW_FULLSCREEN);
 			SDL_SetWindowGrab(sdl_window, SDL_TRUE);
 		}
 	}
