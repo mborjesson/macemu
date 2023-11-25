@@ -43,6 +43,7 @@ prefs_desc platform_prefs_items[] = {
 	{"idlewait", TYPE_BOOLEAN, false,      "sleep when idle"},
 #ifdef USE_SDL_VIDEO
 	{"sdlrender", TYPE_STRING, false,      "SDL_Renderer driver (\"auto\", \"software\" (may be faster), etc.)"},
+	{"sdl_fsnoscale", TYPE_BOOLEAN, false,     "Do not scale fullscreen renderer with SDL_Renderer"},
 #endif
 	{NULL, TYPE_END, false, NULL} // End of list
 };
@@ -286,4 +287,7 @@ void AddPlatformPrefsDefaults(void)
 	PrefsReplaceString("mixer", "/dev/mixer");
 #endif
 	PrefsAddBool("idlewait", true);
+#ifdef USE_SDL_VIDEO
+	PrefsReplaceBool("sdl_fsnoscale", false);
+#endif
 }
