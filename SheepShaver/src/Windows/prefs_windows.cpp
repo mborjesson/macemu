@@ -57,7 +57,7 @@ prefs_desc platform_prefs_items[] = {
 #ifdef USE_SDL_VIDEO
 	{"sdlrender", TYPE_STRING, false,      "SDL_Renderer driver (\"auto\", \"software\" (may be faster), etc.)"},
 	{"sdl_vsync", TYPE_BOOLEAN, false,     "Make SDL_Renderer vertical sync frames to host (eg. with software renderer)"},
-	{"sdl_fsnoscale", TYPE_BOOLEAN, false,     "Do not scale fullscreen to desktop resolution with SDL_Renderer"},
+	{"sdl_nofsscale", TYPE_BOOLEAN, false,     "Do not scale fullscreen to desktop resolution with SDL_Renderer"},
 #endif
 	{"reservewindowskey", TYPE_BOOLEAN, false,      "block Windows key from activating start menu"},
 
@@ -146,7 +146,7 @@ void AddPlatformPrefsDefaults(void)
 #ifdef USE_SDL_VIDEO
 	PrefsReplaceString("sdlrender", "software");
 	PrefsReplaceBool("sdl_vsync", false);
-	PrefsReplaceBool("sdl_fsnoscale", false);
+	PrefsReplaceBool("sdl_nofsscale", false);
 #endif
 	PrefsAddBool("reservewindowskey", false);
 }

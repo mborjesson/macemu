@@ -43,7 +43,7 @@ prefs_desc platform_prefs_items[] = {
 	{"idlewait", TYPE_BOOLEAN, false,      "sleep when idle"},
 #ifdef USE_SDL_VIDEO
 	{"sdlrender", TYPE_STRING, false,      "SDL_Renderer driver (\"auto\", \"software\" (may be faster), etc.)"},
-	{"sdl_fsnoscale", TYPE_BOOLEAN, false,     "Do not scale fullscreen to desktop resolution with SDL_Renderer"},
+	{"sdl_nofsscale", TYPE_BOOLEAN, false,     "Do not scale fullscreen to desktop resolution with SDL_Renderer"},
 #endif
 	{NULL, TYPE_END, false, NULL} // End of list
 };
@@ -288,6 +288,6 @@ void AddPlatformPrefsDefaults(void)
 #endif
 	PrefsAddBool("idlewait", true);
 #ifdef USE_SDL_VIDEO
-	PrefsReplaceBool("sdl_fsnoscale", false);
+	PrefsReplaceBool("sdl_nofsscale", false);
 #endif
 }
